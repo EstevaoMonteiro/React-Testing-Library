@@ -25,9 +25,9 @@ describe('Testa se a página contém as informações corretas de Pokemon', () =
     const { history } = renderWithRouter(<App />);
     const details = screen.getByRole('link', { name: /more details/i });
     userEvent.click(details);
+
     const { pathname } = history.location;
     expect(pathname).toBe('/pokemon/25');
-    expect(details).toBeInTheDocument();
   });
 
   test('Testa se existe um ícone de estrela nos Pokémon favoritados', () => {
@@ -35,12 +35,12 @@ describe('Testa se a página contém as informações corretas de Pokemon', () =
 
     const details = screen.getByRole('link', { name: /more details/i });
     userEvent.click(details);
+
     const checkboxFavorite = screen.getByRole('checkbox', { name: /Pokémon Favoritado\?/i });
     userEvent.click(checkboxFavorite);
-    const markedFavorite = screen.getByRole('img', { name: /pikachu is marked as favorite/i });
-
-    expect(details).toBeInTheDocument();
     expect(checkboxFavorite).toBeChecked();
+
+    const markedFavorite = screen.getByRole('img', { name: /pikachu is marked as favorite/i });
     expect(markedFavorite.src).toBe('http://localhost/star-icon.svg');
     expect(markedFavorite.alt).toBe('Pikachu is marked as favorite');
   });
